@@ -1,0 +1,13 @@
+{
+	"defaultCommand": "code 2>/dev/null \"$FILE\"",
+	"commands": {
+		"Code": "code 2>/dev/null \"$FILE\"",
+		"code": "code 2>/dev/null \"$FILE\"",
+		"VSCode": "code 2>/dev/null \"$FILE\"",
+		"vscode": "code 2>/dev/null \"$FILE\"",
+		"nano": "nano \"$FILE\"",
+		"clip": "echo \"$FILE\" | wl-copy",
+		"web": "webcode; echo \"$FILE\" | wl-copy",
+		"dolphin": "dolphin \"$(dirname \"$FILE\")\" &"
+	}
+}

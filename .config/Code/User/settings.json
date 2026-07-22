@@ -1,0 +1,155 @@
+{
+	"workbench.sideBar.location": "right",
+
+	"material-code.primaryColor": "#8CAACD",
+	"terminal.integrated.enableMultiLinePasteWarning": "never",
+
+	// format
+	"editor.formatOnSave": true,
+	"editor.formatOnType": false,
+	"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+	"C_Cpp.formatting": "clangFormat",
+	"C_Cpp.clang_format_style": "file:/home/TX_Jerry/.clang-format",
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+	"editor.detectIndentation": false,
+	"editor.unicodeHighlight.nonBasicASCII": false,
+	"security.workspace.trust.untrustedFiles": "open",
+	"[cpp]": {
+		"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+		// "editor.autoClosingBrackets": "always",
+    // "editor.formatOnType": true,
+		// "editor.comments.insertSpace": true
+	},
+	"[c]": {
+		"editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+	},
+	"[json]": {
+    "editor.tabSize": 2
+	},
+	"[jsonc]": {
+  	"editor.tabSize": 2
+	},
+	"editor.fontSize": 14,
+	"editor.fontLigatures": false,
+	// "editor.fontFamily": "Noto Sans Mono CJK SC",
+	
+	"editor.tabCompletion": "on",
+	
+	// cmake
+	"cmake.useCMakePresets": "always",
+	"cmake.configureOnOpen": true,
+	"cmake.showConfigureWithDebuggerNotification": false,
+	//"cmake.configureArgs": ["--log-level=VERBOSE"],
+
+	// glsl-lint
+	"glsllint.glslangValidatorPath": "/usr/bin/glslangValidator",
+	"editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          "keyword.control.glsl",
+          "keyword.other.glsl"
+        ],
+        "settings": {
+          "foreground": "#569CD6",   // bright blue for keywords like if, for, uniform
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": [
+          "storage.type.glsl",
+          "support.type.glsl"
+        ],
+        "settings": {
+          "foreground": "#4EC9B0"   // teal for types like vec3, mat4, sampler2D
+        }
+      },
+      {
+          "scope": [
+            "entity.name.function.glsl"
+          ],
+          "settings": {
+          	"foreground": "#DCDCAA"   // yellow for function names
+          }
+      },
+      {
+        "scope": [
+          "variable.other.glsl",
+          "variable.parameter.glsl"
+        ],
+        "settings": {
+          "foreground": "#9CDCFE"   // light blue for variables
+        }
+      },
+      {
+				"scope": [
+					"comment.line.glsl",
+					"comment.block.glsl"
+				],
+				"settings": {
+					"foreground": "#6A9955",  // green for comments
+					"fontStyle": "italic"
+				}
+      },
+      {
+				"scope": "constant.numeric.glsl",
+				"settings": {
+					"foreground": "#B5CEA8"  // light green for numbers
+				}
+      }
+    ]
+	},
+
+	// common
+	"explorer.confirmDelete": false,
+
+	// Gemini
+	"geminicodeassist.project": "lustrous-pact-ksf4c",
+	"geminicodeassist.chat.automaticScrolling": false,
+	"geminicodeassist.displayInlineContextHint": false,
+	"geminicodeassist.rules": "- when not specified to deeply explain, briefly explain and give response fast.\n\n\n\n",
+
+	// git
+	"git.enableSmartCommit": true,
+	"git.confirmSync": false,
+
+	// ESP-IDF
+	"idf.hasWalkthroughBeenShown": true,
+	"idf.gitPath": "/usr/bin/git",
+	"idf.espIdfPath": "/home/TX_Jerry/.espressif/v6.0/esp-idf",
+	"idf.customExtraPaths": "/home/TX_Jerry/.espressif/tools/xtensa-esp-elf/.../bin:/home/TX_Jerry/.espressif/tools/ninja/...",
+	"idf.pythonBinPath": "/home/TX_Jerry/.espressif/python_env/idf6.0_py3.14_env/bin/python",
+	"workbench.colorTheme": "Dark Modern",
+	"geminicodeassist.chat.changeView": "Default diff view",
+	"geminicodeassist.inlineSuggestions.enableAuto": false,
+	"editor.inlineSuggest.edits.allowCodeShifting": "never",
+	"editor.inlineSuggest.edits.renderSideBySide": "never",
+	"github.copilot.nextEditSuggestions.enabled": false,
+	"github.copilot.renameSuggestions.triggerAutomatically": false,
+	"editor.suggestOnTriggerCharacters": true,
+	"editor.inlineSuggest.showToolbar": "never",
+	"editor.inlineSuggest.enabled": false,
+	"editor.inlineSuggest.syntaxHighlightingEnabled": false,
+	"diffEditor.codeLens": true,
+	"markdown.preview.breaks": true,
+
+	// C++ setup
+	"C_Cpp.default.cppStandard": "c++23",
+	"C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
+	"C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+	"editor.minimap.enabled": false,
+
+	// clangd
+	"C_Cpp.intelliSenseEngine": "disabled",
+  "clangd.path": "/usr/bin/clangd",
+  "clangd.arguments": [
+  	"--query-driver=/usr/bin/c++",
+  	"--background-index",
+		//"--format-style=file"
+  ],
+
+	"editor.inlayHints.enabled": "offUnlessPressed", // Only shows hints when holding Ctrl+Alt
+  "editor.parameterHints.enabled": true,
+
+}

@@ -1,0 +1,113 @@
+{
+	// Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"Add TXLib header": {
+		"prefix": "txlib",
+		"body": [
+			"// Copyright (c) 2025 TXLib. Licensed under the MIT License.",
+			"// Module: $1",
+			"",
+			"#pragma once",
+			"#include \"tx/basic_types.hpp\"",
+			"",
+			"namespace tx {",
+			"\t$2",
+			"}"
+		],
+		"description": "Add TXLib header"
+	},
+	"Add TXCSL header": {
+		"prefix": "txcsl",
+		"body": [
+			"// Copyright (c) 2026 TXCSL. Licensed under the MIT License.",
+			"",
+			"#pragma once",
+			"#include \"impl/basic_utils.hpp\"",
+			"#include \"impl/csl/definition.hpp\"",
+			"",
+			"namespace tx::csl {",
+			"\t$2",
+			"}"
+		],
+		"description": "Add TXLib header"
+	},
+	"Toggle Clang-format": {
+		"prefix": "// clang-format toggle",
+		"body": [
+			"// clang-format off",
+			"// clang-format on"
+		],
+		"description": "Toggle Clang-format"
+	},
+	"Move Semantics and Copy Semantics": {
+		"prefix": "move_copy_semantics",
+		"body": [
+			"${1:Class}(const ${1:Class}&) = default;",
+			"${1:Class}& operator=(const ${1:Class}&) = default;",
+			"${1:Class}(${1:Class}&& other) = default;",
+			"${1:Class}& operator=(${1:Class}&& other) = default;"
+		],
+		"description": "Generate Move Semantics and Copy Semantics boilerplate"
+	},
+	"Comment Title: Big Banner": {
+		"prefix": "// title1",
+		"body": [
+			"// ================ $2########## ================",
+			"// **************** ${1:Big Banner} ****************",
+			"// ================ $2########## ================",
+		],
+		"description": "Comment Title: Big Banner"
+	},
+	"Comment Title: Normal Banner": {
+		"prefix": "// title2",
+		"body": [
+			"// =================$2==============================",
+			"// **************** ${1:Normal Banner} ****************",
+			"// =================$2==============================",
+		],
+		"description": "Comment Title: Normal Banner"
+	},
+	"Comment Title: Small Banner": {
+		"prefix": "// title3",
+		"body": [
+			"// -----------------$2-----------------------------",
+			"// ++++++++++++++++ ${1:Small Banner} ++++++++++++++++",
+			"// -----------------$2-----------------------------",
+		],
+		"description": "Comment Title: Small Banner"
+	},
+	"Comment Title: Big Header": {
+		"prefix": "// title4",
+		"body": [
+			"// ################ ${1:Big Header} ################"
+		],
+		"description": "Comment Title: Big Header"
+	},
+	"Comment Title: Normal Header": {
+		"prefix": "// title5",
+		"body": [
+			"// ================ ${1:Normal Header} ================"
+		],
+		"description": "Comment Title: Normal Header"
+	},
+	"Comment Title: Small Header": {
+		"prefix": "// title6",
+		"body": [
+			"// ---------------- ${1:Small Header} ----------------"
+		],
+		"description": "Comment Title: Small Header"
+	}
+	
+}

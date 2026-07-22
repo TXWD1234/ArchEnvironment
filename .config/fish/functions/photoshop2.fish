@@ -1,0 +1,3 @@
+function photoshop2 --wraps='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia WINEDLLOVERRIDES="msimg32=b;d3d11,dxgi,d3d12,d3d9=n,b" /home/TX_Jerry/.local/share/bottles/runners/caffe-9.7/bin/wine64' --description 'alias winelaunch2 __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia WINEDLLOVERRIDES="msimg32=b;d3d11,dxgi,d3d12,d3d9=n,b" /home/TX_Jerry/.local/share/bottles/runners/caffe-9.7/bin/wine64'
+    __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia WINEDLLOVERRIDES="msimg32=b;d3d11,dxgi,d3d12,d3d9=n,b" /home/TX_Jerry/.local/share/bottles/runners/caffe-9.7/bin/wine64 "/mnt/windows/aaaMyApplications/Adobe Photoshop CC 2017/Photoshop.exe"
+end

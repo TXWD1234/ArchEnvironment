@@ -1,0 +1,50 @@
+#!/bin/bash
+
+DATA_DIR="$HOME/.local/share/factorio-dlmod"
+FACTORIO_ENV_VERSION="2.0.73" # Hardcode your system state definition here!
+TARGET_PATH="$HOME/.wine/drive_c/users/steamuser/AppData/Roaming/Factorio/mods/" # Point right to the engine folder directly
+
+if [ -z "$1" ]; then
+	echo "Usage: factorio-dlmod <mod_name_or_url> [custom_output_path]"
+	exit 1
+fi
+
+# struct Parameter { bool openEnv = false; };
+param_openEnv=false
+param_modName=""
+
+# struct State { bool inProcessFlags = true; };
+state_inProcessFlags=true
+
+# $# is argc, $@ is argv
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        "-e")
+            param_openEnv=true
+            shift # comsume one element in argv            
+            continue
+            ;;
+        *)
+			# actual execution
+			# at this point all flags are consumed and parameters and recorded
+			# activate download python script
+
+			param_modName=$1
+
+			if [ -n "$2" ]; then
+			    TARGET_PATH=$(eval echo "$2")  
+			fi
+			
+			break
+            ;;
+    esac
+done
+
+if [ $param_modName ]; then
+	# Pass the fixed environment string straight through as the third array slot
+	"$DATA_DIR/venv/bin/python" "$DATA_DIR/main.py" "$param_modName" "$TARGET_PATH" "$FACTORIO_ENV_VERSION"
+fi
+
+if [ $param_openEnv == "true" ]; then
+	dolphin "$TARGET_PATH" &
+fi
