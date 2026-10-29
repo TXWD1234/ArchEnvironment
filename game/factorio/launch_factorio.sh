@@ -1,0 +1,1 @@
+__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia WINEDLLOVERRIDES="d3d11,dxgi=n,b" WINEDLLOVERRIDES="msimg32=b;d3d11,dxgi,d3d12,d3d9=n,b" /usr/share/steam/compatibilitytools.d/dwproton/files/bin/wine64 "/home/TX_Jerry/.wine/drive_c/Program Files/Factorio/Factorio/bin/x64/factorio.exe"

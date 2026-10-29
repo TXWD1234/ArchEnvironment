@@ -4,34 +4,34 @@ mkdir .vscode
 echo '{
 	"configurations": [
 		{
-			"name": "TX: g++ build and debug CMake project",
+			"name": "TX: g++ build and debug TXLib project",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${command:cmake.launchTargetPath}",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
-			"environment": [],
+			"environment": [
+				{ "name": "__NV_PRIME_RENDER_OFFLOAD", "value": "1" },
+    		{ "name": "__GLX_VENDOR_LIBRARY_NAME", "value": "nvidia" },
+    		{ "name": "__VK_LAYER_NV_optimus", "value": "NVIDIA_only" }
+			],
 			"externalConsole": false,
 			"MIMode": "gdb",
 			"setupCommands": [
 				{
 					"description": "Enable pretty-printing for gdb",
 					"text": "-enable-pretty-printing",
-   				"ignoreFailures": true
+   				 "ignoreFailures": true
 				},
 				{
 					"description": "Set Disassembly Flavor to Intel",
 					"text": "-gdb-set disassembly-flavor intel",
 					"ignoreFailures": true
-				},
-				{
-    	    "description": "Disable symbol downloading",
-    	    "text": "set confirm off",
-    	    "ignoreFailures": true
-    		}
+				}
 			],
-			"miDebuggerPath": "/usr/bin/gdb"
+			"miDebuggerPath": "/usr/bin/gdb",
+			"preLaunchTask": "TX: Build and Sync"
 		}
 	],
 	"version": "2.0.0"
@@ -61,15 +61,17 @@ echo '{
 	],
 	"version": "2.0.0"
 }' > .vscode/tasks.json
+echo '{
+	"tx.devUtils.sourceDirectory": "${workspaceDefaultFolder}",
+	//"cmake.configureArgs": ["--log-level=VERBOSE"],
+	"C_Cpp.errorSquiggles": "enabled"
+}' > .vscode/settings.json
 
 mkdir assets
 mkdir config
 
 mkdir libs
-mkdir libs/TXLib
-cd libs/TXLib
-curl -O https://raw.githubusercontent.com/TXWD1234/TXLib/main/add_txlib.cmake
-cd ../..
+cp ~/Programming/dev/libs/TXLib/add_txlib.cmake libs/
 
 mkdir src
 echo '#include "Project.hpp"
@@ -91,13 +93,9 @@ cp ~/chen.bmp ./chen.bmp
 
 echo 'cmake_minimum_required(VERSION 4.2)
 
-set(libs "${CMAKE_SOURCE_DIR}/libs")
-set(src "${CMAKE_SOURCE_DIR}/src")
-
-include("${libs}/TXLib/add_txlib.cmake")
-
 project(TXProject)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_VERIFY_INTERFACE_HEADER_SETS ON)
 
 # install
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -106,14 +104,16 @@ endif()
 
 # dependencies
 
+set(libs "${CMAKE_SOURCE_DIR}/libs")
+set(src "${CMAKE_SOURCE_DIR}/src")
+
+include("${libs}/add_txlib.cmake")
+
 # TXLib
 tx_add_txlib(
-	LOCAL_DIR
-		/home/TX_Jerry/Programming/dev/libs/TXLib
+	LOCAL_DIR "$ENV{HOME}/Programming/dev/libs/TXLib"
 )
-set(CMakeUtils "${TXLib_SOURCE_DIR}/TXCMakeUtils")
-include("${CMakeUtils}/optimization.cmake")
-include("${CMakeUtils}/link_dir_to_bin.cmake")
+set(CMakeUtils "${TXLib_SOURCE_DIR}/cmake")
 
 add_executable(TXProject 
 	"${src}/main.cpp"
@@ -134,13 +134,16 @@ target_link_libraries(TXProject PRIVATE
 )
 
 # optimization
-tx_add_release_ops(TXProject)
+include("${CMakeUtils}/set_compile_flags.cmake")
+tx_set_compile_flags(TXProject PRIVATE)
 
 # build
 set_target_properties(TXProject PROPERTIES
-	RUNTIME_OUTPUT_DIRECTORY_DEBUG   "${CMAKE_BINARY_DIR}/bin"
-	RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/bin"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+# executable environment
+include("${CMakeUtils}/link_dir_to_bin.cmake")
 tx_link_dir_to_bin(TXProject "${CMAKE_SOURCE_DIR}/assets")
 
 install(TARGETS TXProject
@@ -156,8 +159,7 @@ echo '{
 			"generator": "Ninja",
 			"binaryDir": "build",
 			"cacheVariables": {
-				"CMAKE_BUILD_TYPE": "Debug",
-				"CMAKE_INSTALL_PREFIX": "dist"
+				"CMAKE_BUILD_TYPE": "Debug"
 			}
 		},
 		{
@@ -166,8 +168,7 @@ echo '{
 			"generator": "Ninja",
 			"binaryDir": "build",
 			"cacheVariables": {
-				"CMAKE_BUILD_TYPE": "Release",
-				"CMAKE_INSTALL_PREFIX": "dist"
+				"CMAKE_BUILD_TYPE": "Release"
 			}
 		},
 		{
@@ -176,8 +177,7 @@ echo '{
 			"generator": "Ninja",
 			"binaryDir": "build",
 			"cacheVariables": {
-				"CMAKE_BUILD_TYPE": "RelWithDebInfo",
-				"CMAKE_INSTALL_PREFIX": "dist"
+				"CMAKE_BUILD_TYPE": "RelWithDebInfo"
 			}
 		}
 	],
@@ -200,11 +200,16 @@ echo '{
 echo '{
 	"folders": [
 		{
+			"name": "Project",
 			"path": "."
 		},
 		{
+			"name": "TXLib",
 			"path": "/home/TX_Jerry/Programming/dev/libs/TXLib"
 		}
 	],
-	"settings": {}
-}' > TXProject.code-workspace
+	"settings": {
+		"cmake.sourceDirectory": "${workspaceFolder:Project}"
+  }
+}
+' > TXProject.code-workspace

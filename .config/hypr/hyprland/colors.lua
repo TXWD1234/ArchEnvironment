@@ -6,7 +6,7 @@ hl.config({
         },
     },
     misc = {
-        background_color = "rgba(00efef00)",
+        background_color = "rgba(101418FF)",
     },
 })
 

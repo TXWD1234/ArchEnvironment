@@ -5,3 +5,12 @@
 hl.window_rule({match = {class = "^(kitty)$" }, opacity = "0.90 0.85" })
 hl.window_rule({match = {class = "^(org.strawberrymusicplayer.strawberry)$" }, opacity = "0.95 1.02" })
 hl.window_rule({match = {class = "^(code)$" }, opacity = "0.99 1.04" })
+hl.window_rule({
+  match = {
+    class = "^(steam_app_0)$",
+    title = "^(Endfield)$",
+  },
+  immediate = false,
+  confine_pointer = true,
+  stay_focused = true,
+})

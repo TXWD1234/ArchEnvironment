@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Factorio
+Exec=/home/TX_Jerry/.local/share/applications/launch_factorio.sh
+Keywords=factorio
+Terminal=true
+Icon=factorio
